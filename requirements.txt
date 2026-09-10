@@ -1,7 +1,7 @@
-discord.py[speed]
-python-dotenv
-pydantic
-pydantic-settings
-aiocache
-rapidfuzz
-async-cache
+discord.py[speed]==2.7.1
+python-dotenv==1.2.3
+pydantic==2.13.5
+pydantic-settings==2.15.0
+aiocache==0.12.3
+rapidfuzz==3.14.6
+async-cache==1.2.1
