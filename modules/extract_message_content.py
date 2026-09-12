@@ -1,3 +1,4 @@
+import hashlib
 import logging
 
 from cache import AsyncTTL
@@ -73,9 +74,10 @@ async def extract_message_content(bot: LainBot, message: discord.Message) -> str
     if message.embeds:
         message_content += "\n\n[Ембеды:]"
         for idx, embed in enumerate(message.embeds, 1):
-            if embed.type in ["gifv", "video"]:
-                embed.description = ""
-            message_content += f"\n\n--- Ембед {idx} ---\n{await format_dict_fields(embed.to_dict())}"
+            embed_content = await format_dict_fields(embed.to_dict())
+            if embed.thumbnail:
+                embed_content = f"Hash Value: {hashlib.sha256(embed_content.encode()).hexdigest()}"
+            message_content += f"\n\n--- Ембед {idx} ---\n{embed_content}"
 
     if message.activity:
         activity_dict = await activity_to_dict(message.activity)
