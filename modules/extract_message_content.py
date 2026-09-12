@@ -73,6 +73,8 @@ async def extract_message_content(bot: LainBot, message: discord.Message) -> str
     if message.embeds:
         message_content += "\n\n[Ембеды:]"
         for idx, embed in enumerate(message.embeds, 1):
+            if embed.type in ["gifv", "video"]:
+                embed.description = ""
             message_content += f"\n\n--- Ембед {idx} ---\n{await format_dict_fields(embed.to_dict())}"
 
     if message.activity:
